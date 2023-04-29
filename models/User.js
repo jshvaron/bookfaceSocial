@@ -5,10 +5,28 @@ const monggose = require('mongoose');
 const userSchema = new mongoose.Schema({
 
     // state individual properties of schema types
-    username: {},
-    email: {},
-    thoughts: {},
-    friends: {},
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+        trimmed: true,//any white space around the characters will be removed before saved to db
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: [validateEmail, 'Please fill a valid email address'],//validation function for email to use match below by utlizing Regex
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+
+    },
+    thoughts: {
+        type: Schema.Types.ObjectId,
+        ref: 'Thought'
+    },
+    friends: {
+        type: Schema.Types.ObjectId,
+        ref: 'Friends'
+    },
 })
 
 // Virtual friendCount  retrieves the length of the user's friends array field on query.
