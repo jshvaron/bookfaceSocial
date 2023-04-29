@@ -46,3 +46,5 @@ User.create(
     },
     (err) => (err ? handleError(err) : console.log('created new document!'))
 );
+
+module.exports = User
