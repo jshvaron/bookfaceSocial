@@ -31,3 +31,18 @@ const userSchema = new mongoose.Schema({
 
 // Virtual friendCount  retrieves the length of the user's friends array field on query.
 
+
+// complie a User model based off schema
+
+const User = mongoose.model('User', userSchema);
+
+// creates new instance of User models as a doc for mongoose
+User.create(
+    {
+        username: 'JabaTheHutt',
+        email: 'bigpapa@hutt.com',
+        thoughts: [],
+        friends: [],
+    },
+    (err) => (err ? handleError(err) : console.log('created new document!'))
+);
