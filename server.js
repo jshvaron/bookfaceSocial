@@ -36,3 +36,31 @@ client.connect()
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
+
+// creates new doc in mongodb w/ dbName
+app.post('/create', (req, res) => {
+    // utilizes db connection to add new doc(mongoDB uses docs to store data in BJSON)
+    db.collection('userBase').insertOne(
+        {
+            name: req.body.name,
+            email: req.body.email,
+            thoughts: [],
+            friends: [],
+        }
+    )
+    .then(results => res.jsom(results))
+    .catch(err => {
+        if (err) throw err;
+    });
+});
+app.get('/read', (req, res) => {
+    // Use db connection to find all documents in collection
+    db.collection('userBase')
+      .find()
+      .toArray()
+      .then(results => res.json(results))
+      .catch(err => {
+        if (err) throw err;
+      });
+  });
+  
