@@ -32,20 +32,15 @@ const thoughtSchema = new mongoose.Schema({
 
 // uses mongoose model to compile a model on thoughtSchema
 const Thought = mongoose.model('thought', thoughtSchema);
-const handleError = (err) => console.error(err);
 
 // creates new thought model doc
 Thought.create({
     thoughtText: "This is a new thought",
     username: "someuser",
     reactions: [reactionId1, reactionId2] // assuming reactionId1 and reactionId2 are valid object IDs for reactions
-  })
-.then(thought => {
-    console.log(thought);
-})
-.catch(err => {
-    console.error(err);
-});
+  }),
+  (err) => (err ? handleError(err) : console.log('created new document!'));
+
 
 // export Thought
 module.exports = Thought;

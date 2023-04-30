@@ -1,5 +1,5 @@
 // c/Require schema/model from mongoose
-const monggose = require('mongoose');
+const mongoose = require('mongoose');
 
 // new instance of schema class
 const userSchema = new mongoose.Schema({
