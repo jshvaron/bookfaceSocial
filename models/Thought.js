@@ -21,17 +21,22 @@ const thoughtSchema = new mongoose.Schema({
         required: true,
     },
     reactions: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'reactionSchema'
     },
-
+    toJSON: {
+        virtuals: true
+    },
+    id: false
 });
 
 //  virtual  reactionCount  retrieves the length of the thought's reactions array field on query.
-
+thoughtSchema.virtual('reactionCount').get(function() {
+    return this.reactions.length;
+});
 
 // uses mongoose model to compile a model on thoughtSchema
-const Thought = mongoose.model('thought', thoughtSchema);
+const Thought = new mongoose.model('thought', thoughtSchema);
 
 // creates new thought model doc
 Thought.create({

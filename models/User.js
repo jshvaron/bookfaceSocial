@@ -20,21 +20,27 @@ const userSchema = new mongoose.Schema({
 
     },
     thoughts: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Thought'
     },
     friends: {
-        type: Schema.Types.ObjectId,
-        ref: 'Friends'
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
+    toJSON: {
+        virtuals: true
+    },
+    id: false,
 })
 
 // Virtual friendCount  retrieves the length of the user's friends array field on query.
-
+userSchema.virtual('friendCount').get(function() {
+    return this.friends.length;
+});
 
 // complie a User model based off schema
 
-const User = mongoose.model('User', userSchema);
+const User = new mongoose.model('User', userSchema);
 
 // creates new instance of User models as a doc for mongoose
 User.create(
