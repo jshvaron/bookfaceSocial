@@ -2,7 +2,7 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const app = express();
 const port = 3001;
-const routes = require('./routes');
+const routes = require('./routes/routes');
 
 
 // connection string to local instance of MongoDb
@@ -26,11 +26,11 @@ client.connect()
 
         // start express server
         app.listen(port, () => {
-            console.log(` App listening at http:localhost:${port}`);
+            console.log(` App listening at https://localhost:${port}`);
         });
     })
     .catch((err) => {
-        console.error('Mongo connection errpr:', err.message);
+        console.error('Mongo connection error:', err.message);
     })
 // parses incoming request to JSON
 app.use(express.urlencoded({ extended: true }));

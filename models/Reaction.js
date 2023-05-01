@@ -24,11 +24,7 @@ const reactionSchema = new mongoose.Schema({
         default: Date.now,
         get: timestamp => Date(timestamp).tolocalString(),
     },
-    toJSON: {
-        getters: true
-    },
-    id: false
-});
+}, { toJSON: { virtuals: true }, id: false });
 
 
 module.exports = reactionSchema;

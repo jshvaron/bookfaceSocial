@@ -1,6 +1,8 @@
 // c/Require schema/model from mongoose
 const mongoose = require('mongoose');
 
+const validateEmail = email => /^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/.test(email);
+
 // new instance of schema class
 const userSchema = new mongoose.Schema({
 
@@ -27,11 +29,8 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    toJSON: {
-        virtuals: true
-    },
-    id: false,
-})
+}, { toJSON: { virtuals: true }, id: false });
+
 
 // Virtual friendCount  retrieves the length of the user's friends array field on query.
 userSchema.virtual('friendCount').get(function() {
@@ -43,14 +42,8 @@ userSchema.virtual('friendCount').get(function() {
 const User = new mongoose.model('User', userSchema);
 
 // creates new instance of User models as a doc for mongoose
-User.create(
-    {
-        username: 'JabaTheHutt',
-        email: 'bigpapa@hutt.com',
-        thoughts: [],
-        friends: [],
-    },
-    (err) => (err ? handleError(err) : console.log('created new document!'))
-);
-
+User.create()
+    .then(() => console.log('created new document!'))
+    .catch(err => handleError(err));
+    
 module.exports = User
