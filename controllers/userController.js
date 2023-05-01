@@ -20,12 +20,16 @@ module.exports = {
             :res.json(User);
         })
         .catch((err) => res.status(500).json(err));
+        console.log(err);
+
     },
     // function to Post new user
     postUser(req, res) {
         User.create(req.body)
         .then((User) => res.json(User))
-        .catch((err) => res.status(500));
+        .catch((err) => res.status(500).json(err));
+        console.log(err);
+
     },
     // update user by id
     UpdateUser(req, res) {
@@ -40,6 +44,8 @@ module.exports = {
             :res.json(User);
         })
         .catch((err) => res.status(500).json(err));
+        console.log(err);
+
     },
     // Delete user by id
     deleteUser(req, res) {
@@ -56,6 +62,8 @@ module.exports = {
             :res.json(User);
         })
         .catch((err) => res.status(500).json(err));
+        console.log(err);
+
     },
     // adds friend to array
     addFriend(req, res) {
@@ -70,6 +78,8 @@ module.exports = {
             :res.json(User);
         })
         .catch((err) => res.status(500).json(err));
+        console.log(err);
+
     },
         // delete friend from array
         deleteFriend(req, res) {
@@ -83,5 +93,7 @@ module.exports = {
                 ? res.status(404).json({message: 'The friend associated with this User Id has been deleted.'})
                 :res.json(User);
             })
+            .catch((err) => res.status(500).json(err));
+            console.log(err);
         },
 };
