@@ -32,6 +32,7 @@ module.exports = {
         User.findOneAndUpdate(
             {_id: req.params.userId},
             {$set: req.body},
+            { new: true },//Returns updated doc or og would return
         )
         .then((User) => {
             !User
@@ -55,5 +56,19 @@ module.exports = {
             :res.json(User);
         })
         .catch((err) => res.status(500).json(err));
-
-}
+    },
+    // adds friend to subdoc
+    addFriend(req, res) {
+        User.findOneAndUpdate(
+            {_id:req.params.userId },
+            {$push: {friends: req.params.friendId}},//pushes friends to array
+            { new: true },//Returns updated doc or og would return
+        )
+        .then((User) => {
+            !User
+            ? res.status(404).json({message: 'The friend associated with this User Id has been added.'})
+            :res.json(User);
+        })
+        .catch((err) => res.status(500).json(err));
+    },
+};
