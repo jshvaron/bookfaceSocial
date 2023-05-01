@@ -27,6 +27,18 @@ module.exports = {
         .then((User) => res.json(User))
         .catch((err) => res.status(500));
     },
-    
+    // update user by id
+    UpdateUser(req, res) {
+        User.findOneAndUpdate(
+            {_id: req.params.userId},
+            {$set: req.body},
+        )
+        .then((User) => {
+            !User
+            ? res.status(404).json({message: 'A User with that ID does not exist.'})
+            :res.json(User);
+        })
+        .catch((err) => res.status(500).json(err));
+    }
 
 }
