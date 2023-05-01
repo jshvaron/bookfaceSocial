@@ -32,7 +32,7 @@ module.exports = {
 
     },
     // update user by id
-    UpdateUser(req, res) {
+    updateUser(req, res) {
         User.findOneAndUpdate(
             {_id: req.params.userId},
             {$set: req.body},
@@ -81,19 +81,19 @@ module.exports = {
         console.log(err);
 
     },
-        // delete friend from array
-        deleteFriend(req, res) {
-            User.findOneAndDelete(
-                {_id:req.params.userId },
-                {$pull: {friends: req.params.friendId}},//pulls friends from array
-                { new: true },//Returns updated doc or og would return
-            )
-            .then((User) => {
-                !User
-                ? res.status(404).json({message: 'The friend associated with this User Id was not succesfully deleted.'})
-                :res.json(User);
-            })
-            .catch((err) => res.status(500).json(err));
-            console.log(err);
-        },
+    // delete friend from array
+    deleteFriend(req, res) {
+        User.findOneAndDelete(
+            {_id:req.params.userId },
+            {$pull: {friends: req.params.friendId}},//pulls friends from array
+            { new: true },//Returns updated doc or og would return
+        )
+        .then((User) => {
+            !User
+            ? res.status(404).json({message: 'The friend associated with this User Id was not succesfully deleted.'})
+            :res.json(User);
+        })
+        .catch((err) => res.status(500).json(err));
+        console.log(err);
+    },
 };
