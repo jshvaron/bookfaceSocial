@@ -74,7 +74,7 @@ module.exports = {
         )
         .then((User) => {
             !User
-            ? res.status(404).json({message: 'The friend associated with this User Id has been added.'})
+            ? res.status(404).json({message: 'The friend associated with this User Id was not succesfully added.'})
             :res.json(User);
         })
         .catch((err) => res.status(500).json(err));
@@ -90,7 +90,7 @@ module.exports = {
             )
             .then((User) => {
                 !User
-                ? res.status(404).json({message: 'The friend associated with this User Id has been deleted.'})
+                ? res.status(404).json({message: 'The friend associated with this User Id was not succesfully deleted.'})
                 :res.json(User);
             })
             .catch((err) => res.status(500).json(err));
