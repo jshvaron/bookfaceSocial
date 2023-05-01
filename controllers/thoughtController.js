@@ -28,7 +28,7 @@ module.exports = {
         .then((Thought) => {
           return Thought.findOneAndUpdate(//gets Thought and updates thought field]
             { username: req.body.username },
-            { $addToSet: { thoughts: thought._id } },//adds here
+            { $addToSet: { Thoughts: Thought._id } },//adds here
             { new: true } //Returns updated doc or og would return
           );
         });
