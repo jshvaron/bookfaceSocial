@@ -34,7 +34,7 @@ module.exports = {
         });
     },
     // update Thought by id
-    UpdateThought(req, res) {
+    updateThought(req, res) {
         Thought.findOneAndUpdate(
             {_id: req.params.ThoughtId},
             {$set: req.body},
@@ -67,20 +67,34 @@ module.exports = {
         console.log(err);
 
     },
-        // adds friend to array
-        addReaction(req, res) {
-            Thought.findOneAndUpdate(
-                {_id:req.params.ThoughtId },
-                {$push: {friends: req.params.friendId}},//pushes friends to array
-                { new: true },//Returns updated doc or og would return
-            )
-            .then((Thought) => {
-                !Thought
-                ? res.status(404).json({message: 'The Reaction associated with this ThoughtId was not succesfully added.'})
-                :res.json(Thought);
-            })
-            .catch((err) => res.status(500).json(err));
-            console.log(err);
-    
-        },
+    // adds friend to array
+    addReaction(req, res) {
+        Thought.findOneAndUpdate(
+            {_id:req.params.ThoughtId },
+            {$push: {friends: req.params.friendId}},//pushes friends to array
+            { new: true },//Returns updated doc or og would return
+        )
+        .then((Thought) => {
+            !Thought
+            ? res.status(404).json({message: 'The Reaction associated with this ThoughtId was not succesfully added.'})
+            :res.json(Thought);
+        })
+        .catch((err) => res.status(500).json(err));
+        console.log(err);
+
+    },
+    deleteReaction(req, res) {
+        Thought.findOneAndDelete(
+            {_id:req.params.ThoughtId },
+            {$pull: {friends: req.params.ThoughtId}},//pulls friends from array
+            { new: true },//Returns updated doc or og would return
+        )
+        .then((Thought) => {
+            !Thought
+            ? res.status(404).json({message: 'The Reaction associated with this Thought Id was not succesfully deleted.'})
+            :res.json(Thought);
+        })
+        .catch((err) => res.status(500).json(err));
+        console.log(err);
+    },
 };
