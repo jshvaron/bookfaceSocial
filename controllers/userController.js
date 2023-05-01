@@ -10,7 +10,17 @@ module.exports = {
             console.log({message: err});
             return res.status(500).json(err);
         }));
-    };
+    },
+    // getUserbyId, if id doesnt exist 404 err, else  obj to JSON, and catches error
+    getUserById(req, res){
+        User.findOne({_id: req.params.getUserById})
+        .then((User) =>{
+            !User
+            ? res.status(404).json({message: 'A User with that ID does not exist.'})
+            :res.json(User);
+        })
+        .catch((err) => res.status(500).json(err));
+    },
 
 
 }
