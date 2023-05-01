@@ -35,10 +35,25 @@ module.exports = {
         )
         .then((User) => {
             !User
+            ? res.status(404).json({message: 'The user associated with that Id has been updated.'})
+            :res.json(User);
+        })
+        .catch((err) => res.status(500).json(err));
+    },
+    // Delete user by id
+    deleteUser(req, res) {
+        User.findOneAndDelete(
+            {_id: req.params.userId},
+            {$set: req.body},
+        )
+        .then((User) => {
+            res.json({message: 'The user associated with that Id has been deleted'})
+        })
+        .then((User) => {
+            !User
             ? res.status(404).json({message: 'A User with that ID does not exist.'})
             :res.json(User);
         })
         .catch((err) => res.status(500).json(err));
-    }
 
 }
