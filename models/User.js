@@ -21,10 +21,10 @@ const userSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
 
     },
-    thoughts: {
+    thoughts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Thought'
-    },
+    }],
     friends: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -34,16 +34,17 @@ const userSchema = new mongoose.Schema({
 
 // Virtual friendCount  retrieves the length of the user's friends array field on query.
 userSchema.virtual('friendCount').get(function() {
-    return this.friends.length;
+    return this.friends?.length;
 });
 
 // complie a User model based off schema
 
 const User = new mongoose.model('User', userSchema);
-
+console.log(userSchema);
+console.log(User);
 // creates new instance of User models as a doc for mongoose
-User.create()
-    .then(() => console.log('created new document!'))
-    .catch(err => handleError(err));
+// User.create()
+//     .then(() => console.log('created new USER document!'))
+//     .catch(err => handleError(err));
     
-module.exports = User
+module.exports = User;

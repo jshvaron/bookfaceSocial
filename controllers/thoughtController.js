@@ -1,5 +1,5 @@
 const { isErrored } = require('stream');
-const { Thought } = require('../models/Thought');
+const { User, Thought } = require('../models');
 
 module.exports = {
     // getThoughts function finds() all Thoughts, obj to JSON, catches errors
@@ -13,14 +13,16 @@ module.exports = {
     },
     // getThoughtsbyId, if id doesnt exist 404 err, else  obj to JSON, and catches error
     getThoughtsbyId(req, res){
-        Thought.findOne({_id: req.params.getThoughtById})
-        .then((Thought) => {
-            !Thought
+        User.findById(req.params.userId)
+        .populate('thoughts')
+        .then((user) => {
+            console.log(user)
+
+            !user
             ? res.status(404).json({message: 'A Thought with that ID does not exist.'})
-            :res.json(Thought);
+            :res.json(user);
         })
-        .catch((err) => res.status(500).json(err));
-        console.log(err);
+        // .catch((err) => res.status(500).json(err));
     },
     // function to Post new Thought
     postThought(req, res) {

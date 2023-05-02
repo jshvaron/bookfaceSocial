@@ -19,7 +19,7 @@ router.route('/:userId')
     .put(updateThought)
     .delete(deleteThought);
 // targetted user(friend) API routes
-router.route('/:userId/frineds/:friendsId')
+router.route('/:userId/friends/:friendsId')
     .post(addReaction)
     .delete(deleteReaction);
 

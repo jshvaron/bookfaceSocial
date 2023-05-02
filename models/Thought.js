@@ -1,7 +1,7 @@
 // require schema/model from mongoose
 const { time } = require('console');
 const mongoose = require('mongoose');
-const reactions = require('./Reaction')
+const reactions = require('./Reaction');
 // construct new Thought schema class
 const thoughtSchema = new mongoose.Schema({
 
@@ -28,16 +28,16 @@ const thoughtSchema = new mongoose.Schema({
 
 //  virtual  reactionCount  retrieves the length of the thought's reactions array field on query.
 thoughtSchema.virtual('reactionCount').get(function() {
-    return this.reactions.length;
+    return this.reactions?.length;
 });
 
 // uses mongoose model to compile a model on thoughtSchema
-const Thought = new mongoose.model('thought', thoughtSchema);
+const Thought = mongoose.model('Thought', thoughtSchema);
 
 // creates new thought model doc
-Thought.create()
-    .then(() => console.log('created new document!'))
-    .catch(err => handleError(err));
+// Thought.create()
+//     .then(() => console.log('created new THOUGHT document!'))
+//     .catch(err => handleError(err));
     
 // export Thought
 module.exports = Thought;
