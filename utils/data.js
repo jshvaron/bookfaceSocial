@@ -64,19 +64,17 @@ const userReactions = [
 // Get a random item given an array
 const getFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-// get random name form get array function using userNames data array strings
-const getRandoName = () => 
-    `${getFromArray(userNames)}${getFromArray(userNames)}`;
+// returns user
+const getRandoName = () => {
+    return`${getFromArray(userNames)} ${getFromArray(userNames)}`;
+}
+// returns userthoughts
+const getAssignedThought = () => {
+    return `${getFromArray(userthoughts)} ${getFromArray(userthoughts)}`;
 
-const getAssignedThought = (init) => {
-    let thoughtResult = [];
-    for (let i = 0; i < int; i++) {
-        thoughtResult.push({
-            thoughtContent: getFromArray,
-            reactionContent: [...getRandomReaction(2)]//will refrence getRandomReaction function @ line: 82
-        })
-    }
 };
+    
+    
 
 
 // generates responses from userReaction data array strings
@@ -84,15 +82,15 @@ const getRandomReaction = (int) => {
     if (int === 1) { 
         return getFromArray(userReactions);
     }
-}
-let results = [];
-for (let i = 0; i < int; i++) {
-  results.push({
-    userReactions: getFromArray(userReactions),
-    userNames: getRandoName(),
-  });
-  return results;
-}
+
+    let results = [];
+    for (let i = 0; i < int; i++) {
+    results.push({
+        userReactions: getFromArray(userReactions),
+        userNames: getRandoName(),
+    });
+    return results;
+}};
 
 module.exports = { getRandoName, getAssignedThought, getRandomReaction };
 
