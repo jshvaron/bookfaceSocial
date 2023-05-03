@@ -34,10 +34,7 @@ thoughtSchema.virtual('reactionCount').get(function() {
 // uses mongoose model to compile a model on thoughtSchema
 const Thought = mongoose.model('Thought', thoughtSchema);
 
-// creates new thought model doc
-// Thought.create()
-//     .then(() => console.log('created new THOUGHT document!'))
-//     .catch(err => handleError(err));
+
     
 // export Thought
 module.exports = Thought;

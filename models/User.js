@@ -42,9 +42,6 @@ userSchema.virtual('friendCount').get(function() {
 const User = new mongoose.model('User', userSchema);
 console.log(userSchema);
 console.log(User);
-// creates new instance of User models as a doc for mongoose
-// User.create()
-//     .then(() => console.log('created new USER document!'))
-//     .catch(err => handleError(err));
+;
     
 module.exports = User;
